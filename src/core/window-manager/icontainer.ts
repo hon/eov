@@ -1,5 +1,5 @@
+/*
 class Region{
-    id: ''
     position: ''
       // left 左侧
       // right 右侧
@@ -27,4 +27,15 @@ class Region{
     remove(){}   //将容器或widget从容器删除
     children(){} //  子容器列表
     getRegion() {} // 获取摸个容器
+}
+*/
+
+interface IContainer {
+  append()
+  prepend()
+  insert()
+  remove()
+  children()
+  len()
+  getContainer()
 }
