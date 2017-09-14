@@ -1,4 +1,12 @@
-import EOVUI from '../ui'
+import EOVUI from './../../ui'
+import Head from './head'
+import Body from './body'
+
+
+let 
+    winBody = new Body,
+    winHead = new Head
+
 
 // impl IContainer
 // 在widget中组装ui
@@ -14,11 +22,49 @@ class Window extends EOVUI{
     }
     regionId: ''  //嵌入在哪个region里
 
-    size: {}
-    close() {}
+    // 添加头部，头部相关的操作，可以由头部本身操作
+    // 如：this.head.addTitle(); this.head.addAction();
+    get head() {
+        return winHead
+    }
+    set head(head) {
+        this.head = head
+    }
+
+    // 添加窗口体，窗口体本身的操作由窗口体本身操作
+    // 如： this.body.addContent();
+    get body() {
+        return winBody
+    }
+    set body(body) {
+        this.body = body
+    }
+
+    get dimension() {
+        return {
+            w: 100,
+            h: 100,
+            x: 0,
+            y: 0
+        }
+    }
+    set dimension(value) {
+        this.dimension = value
+    }
+
+    close() {
+        this.el.display = 'none'
+    }
     
-    max() {}
-    min() {}
+    max() {
+        this.dimension.w = '100%'
+        this.dimension.h = '100%'
+    }
+
+    min() {
+        this.collapos()
+        this.dimension.h = 20
+    }
 
 
     // 加入group
@@ -26,35 +72,11 @@ class Window extends EOVUI{
         
     }
 
-    collapos() {}
-    expand() {}
-    
-
-    // 加入到Container
-    appendTo() {}
-
-    // 添加功能, 默认添加在右侧
-    addActionBtn({
-        title: '',
-        icon: '',
-        action: function(){}
-    }) {}
-
-    // 添加标题头
-    addTitleBar() {
-
+    collapos() {
+        this.body.hide()
+    }
+    expand() {
+        this.body.show()
     }
 
 }
-
-// 标题栏
-class TitleBar{}
-
-// 主体
-class WindowBody{}
-
-// 对widget本身进行操作
-class MenuBar{}
-
-// 对点击对象进行操作
-class ContexMenu{}
